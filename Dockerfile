@@ -25,7 +25,10 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && apt-get install -y ldap-utils procps openjdk-7-jre-headless curl \
     && curl http://www.eu.apache.org/dist//directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} > ${APACHEDS_ARCHIVE} \
     && dpkg -i ${APACHEDS_ARCHIVE} \
-	&& rm ${APACHEDS_ARCHIVE}
+    && rm ${APACHEDS_ARCHIVE} \
+    && apt-get -y autoremove \
+    && apt-get clean \
+    && rm -Rf /var/lib/apt/lists/*
 
 #############################################
 # ApacheDS bootstrap configuration
