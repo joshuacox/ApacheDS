@@ -14,6 +14,7 @@ APACHEDS_USER=apacheds \
 APACHEDS_GROUP=apacheds \
 APACHEDS_INSTANCE=default \
 APACHEDS_BOOTSTRAP=/bootstrap \
+KERBEROS_PORT=88 \
 KERBEROS_REALM=EXAMPLE.COM \
 KERBEROS_HOST=example.com
 
@@ -45,6 +46,8 @@ RUN mkdir ${APACHEDS_BOOTSTRAP}/cache \
 ADD scripts/run.sh /run.sh
 RUN chown ${APACHEDS_USER}:${APACHEDS_GROUP} /run.sh \
     && chmod u+rx /run.sh
+
+COPY templates /opt/templates
 
 #############################################
 # ApacheDS wrapper command

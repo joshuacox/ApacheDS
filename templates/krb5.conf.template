@@ -1,0 +1,7 @@
+[libdefaults]
+    default_realm = $KERBEROS_REALM 
+
+[realms]
+    $KERBEROS_REALM = {
+        kdc = $KERBEROS_HOST:$KERBEROS_PORT
+    }
