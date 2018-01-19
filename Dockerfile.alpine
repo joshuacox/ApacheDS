@@ -23,9 +23,12 @@ VOLUME ${APACHEDS_DATA}
 
 RUN apk update \
   && apk upgrade \
-  && apk add openssl \
-  && apk add bash \
-  && apk add procps curl gettext \
+  && apk add  --no-cache \
+     openssl \
+     bash \
+     procps \
+     curl \
+     gettext \
   && mkdir /opt \
   && cd /opt \
   && curl http://www.eu.apache.org/dist//directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} > ${APACHEDS_ARCHIVE} \
