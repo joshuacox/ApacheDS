@@ -21,6 +21,11 @@ fi
 pidFile=${APACHEDS_INSTANCE_DIRECTORY}/run/apacheds-${APACHEDS_INSTANCE}.pid
 [[ -e $pidFile ]] && rm $pidFile
 
+# Create krb5.conf
+envsubst \
+< /opt/templates/krb5.conf.template \
+> /etc/krb5.conf
+
 # Execute the server in console mode and not as a daemon.
 cd /opt/apacheds-${APACHEDS_VERSION}/bin
 exec ./apacheds console ${APACHEDS_INSTANCE}

@@ -23,7 +23,7 @@ VOLUME ${APACHEDS_DATA}
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
     && apt-get update \
-    && apt-get install -y ldap-utils procps openjdk-7-jre-headless curl \
+    && apt-get install -y ldap-utils procps openjdk-7-jre-headless curl gettext-base \
     && curl http://www.eu.apache.org/dist//directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} > ${APACHEDS_ARCHIVE} \
     && dpkg -i ${APACHEDS_ARCHIVE} \
     && rm ${APACHEDS_ARCHIVE} \
