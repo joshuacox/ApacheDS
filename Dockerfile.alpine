@@ -16,9 +16,8 @@ KERBEROS_PORT=88 \
 KERBEROS_REALM=EXAMPLE.COM \
 KERBEROS_HOST=example.com
 
-ENV APACHEDS_ARCHIVE=apacheds-${APACHEDS_VERSION}-${APACHEDS_ARCH}.deb \
+ENV APACHEDS_ARCHIVE=apacheds-${APACHEDS_VERSION}-${APACHEDS_ARCH}.tar.gz \
 APACHEDS_DATA=/var/lib/apacheds-${APACHEDS_VERSION}
-
 
 VOLUME ${APACHEDS_DATA}
 
@@ -28,9 +27,9 @@ RUN apk update \
   && apk add bash \
   && apk add procps curl gettext \
   && curl http://www.eu.apache.org/dist//directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} > ${APACHEDS_ARCHIVE} \
+  && cd /opt && tar zxf ${APACHEDS_ARCHIVE} \
   && rm ${APACHEDS_ARCHIVE} \
   && rm -rf /var/cache/apk/*
-
 
 #############################################
 # ApacheDS bootstrap configuration
@@ -54,4 +53,3 @@ COPY templates /opt/templates
 # ApacheDS wrapper command
 #############################################
 CMD ["/run.sh"]
-
