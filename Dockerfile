@@ -6,13 +6,17 @@ MAINTAINER Henrik Sachse <t3x7m3@posteo.de>
 # ApacheDS installation
 #############################################
 
-ENV APACHEDS_VERSION 2.0.0-M24
-ENV APACHEDS_ARCH amd64
+ENV APACHEDS_VERSION=2.0.0-M24 \
+APACHEDS_ARCH=amd64 \
+APACHEDS_ARCHIVE=apacheds-${APACHEDS_VERSION}-${APACHEDS_ARCH}.deb \
+APACHEDS_DATA=/var/lib/apacheds-${APACHEDS_VERSION} \
+APACHEDS_USER=apacheds \
+APACHEDS_GROUP=apacheds \
+APACHEDS_INSTANCE=default \
+APACHEDS_BOOTSTRAP=/bootstrap \
+KERBEROS_REALM=EXAMPLE.COM \
+KERBEROS_HOST=example.com
 
-ENV APACHEDS_ARCHIVE apacheds-${APACHEDS_VERSION}-${APACHEDS_ARCH}.deb
-ENV APACHEDS_DATA /var/lib/apacheds-${APACHEDS_VERSION}
-ENV APACHEDS_USER apacheds
-ENV APACHEDS_GROUP apacheds
 
 VOLUME ${APACHEDS_DATA}
 
@@ -27,8 +31,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # ApacheDS bootstrap configuration
 #############################################
 
-ENV APACHEDS_INSTANCE default
-ENV APACHEDS_BOOTSTRAP /bootstrap
 
 ADD instance/* ${APACHEDS_BOOTSTRAP}/conf/
 RUN mkdir ${APACHEDS_BOOTSTRAP}/cache \
